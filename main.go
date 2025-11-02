@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"task-service/internal"
+)
 
 func main() {
-	fmt.Println("GASSSSSSS")
+	internal.NewServer().Run()
 }
