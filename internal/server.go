@@ -24,6 +24,24 @@ type Server struct {
 	router *http.ServeMux
 }
 
+// Middleware untuk CORS
+func corsMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Izinkan domain frontend kamu di sini (misal: http://localhost:5173 atau domain production)
+		w.Header().Set("Access-Control-Allow-Origin", "*") // gunakan "*" hanya untuk dev
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+
+		// Handle preflight request (OPTIONS)
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
 func (s *Server) initRoute() {
 	taskMux := http.NewServeMux()
 
@@ -36,7 +54,8 @@ func (s *Server) initRoute() {
 
 	taskHandler.SetupRoutes()
 
-	s.router.Handle(helper.ApiGrup+"/", http.StripPrefix(helper.ApiGrup, taskMux))
+	// Bungkus authMux dengan middleware CORS
+	s.router.Handle(helper.ApiGrup+"/", corsMiddleware(http.StripPrefix(helper.ApiGrup, taskMux)))
 
 	log.Println("✅ ROUTES SETUP COMPLETE ON PREFIX :", helper.ApiGrup)
 }
