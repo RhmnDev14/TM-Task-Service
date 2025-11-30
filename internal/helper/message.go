@@ -12,4 +12,6 @@ const (
 	InternalServerError  = "internal server error"
 	InvalidMethodSigning = "invalid token signing method"
 	InvalidToken         = "token invalid"
+	Unauthorized         = "unauthorized"
+	InvalidTaskID        = "invalid task ID: %v"
 )

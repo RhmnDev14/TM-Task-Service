@@ -7,3 +7,7 @@ type TaskDto struct {
 	WorkSpace  int    `json:"works_pace"`
 	Assignee   int    `json:"assigne"`
 }
+
+type UpdateTaskProgressDto struct {
+	Progress int `json:"progress"`
+}

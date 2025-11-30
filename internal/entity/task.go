@@ -12,6 +12,7 @@ type Task struct {
 	Level      int       `json:"level"`
 	WorkSpace  int       `json:"works_pace"`
 	Assignee   int       `json:"assigne"`
+	Progress   int       `json:"progress"`
 	CreatedBy  int       `json:"created_by"`
 	CreatedAt  time.Time `json:"created_at"`
 	UpdatedAt  time.Time `json:"updated_at"`

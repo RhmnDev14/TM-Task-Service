@@ -68,3 +68,11 @@ func WriteJSON(w http.ResponseWriter, status int, data any) {
 func ErrorHandle(param error) error {
 	return fmt.Errorf("ERROR : %v", param)
 }
+
+func ParseUint(s string) (uint, error) {
+	val, err := strconv.ParseUint(s, 10, 32)
+	if err != nil {
+		return 0, err
+	}
+	return uint(val), nil
+}
