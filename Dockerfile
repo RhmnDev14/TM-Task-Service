@@ -31,6 +31,9 @@ WORKDIR /app
 # Copy built binary from builder
 COPY --from=builder /app/main .
 
+# Copy .env fisik ke container
+COPY .env ./
+
 # Expose port dari .env (default 8070)
 EXPOSE 8070
 
