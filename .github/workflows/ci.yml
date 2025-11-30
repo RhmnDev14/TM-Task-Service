@@ -1,4 +1,4 @@
-name: CI - Auth Service
+name: CI - Task Service
 
 on:
   push:
@@ -27,18 +27,18 @@ jobs:
         run: go test ./... -v
 
       - name: 🧱 Build binary
-        run: go build -o auth-service main.go
+        run: go build -o task-service main.go
 
       - name: 🐳 Setup Docker
         uses: docker/setup-buildx-action@v3
 
       - name: 🐳 Build Docker image
         run: |
-          docker build -t auth-service:latest .
+          docker build -t task-service:latest .
           docker images
 
       # Optional: Run container to test
       - name: ▶️ Run container
         run: |
-          docker run --rm -d -p 8070:8070 --name auth-test auth-service:latest
+          docker run --rm -d -p 8070:8070 --name task-test task-service:latest
           docker ps

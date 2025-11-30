@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: be_auth_service_tm
+    container_name: be_task_service_tm
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     env_file:
