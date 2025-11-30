@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"log"
 	"task-service/internal/helper"
 	"time"
 
@@ -43,7 +44,7 @@ type Config struct {
 func NewConfig() *Config {
 	// Load .env file
 	if err := godotenv.Load(); err != nil {
-		panic("⚠️  Warning: .env file not found, using system environment variables")
+		log.Println("⚠️  Warning: .env file not found, using system environment variables")
 	}
 
 	var cfg Config
