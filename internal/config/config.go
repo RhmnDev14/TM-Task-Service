@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"log"
 	"task-service/internal/helper"
 	"time"
@@ -81,17 +80,12 @@ func NewConfig() *Config {
 	}
 
 	// Validasi
-	if err := cfg.validate(); err != nil {
-		panic(fmt.Sprintf("FATAL: Configuration validation failed: %v", err))
-	}
-
+	cfg.validate()
 	return &cfg
 }
 
-func (c *Config) validate() error {
+func (c *Config) validate() {
 	if len(c.TokenConfig.JwtSignatureKy) == 0 {
-		return fmt.Errorf("JWT signature key is required")
+		log.Println("⚠️  Warning: JWT signature key is empty")
 	}
-
-	return nil
 }
