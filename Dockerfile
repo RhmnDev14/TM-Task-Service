@@ -29,6 +29,9 @@ WORKDIR /app
 # Copy built binary
 COPY --from=builder /app/main .
 
+# Set timezone environment (opsional)
+ENV TZ=Asia/Jakarta
+
 # Expose port
 EXPOSE 8070
 
